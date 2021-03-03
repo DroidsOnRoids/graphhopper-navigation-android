@@ -116,10 +116,10 @@ subprojects {
                         withXml {
                             def dependencies = asNode().appendNode('dependencies')
                             configurations.implementation.allDependencies.each {
-                                addDependency(dependencies, it)
+                                addDependency(dependencies, it).appendNode('scope', 'runtime')
                             }
                             configurations.api.allDependencies.each {
-                                addDependency(dependencies, it).appendNode('scope', 'runtime')
+                                addDependency(dependencies, it)
                             }
                         }
                     }
