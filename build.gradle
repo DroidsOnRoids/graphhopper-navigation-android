@@ -119,7 +119,7 @@ subprojects {
                                 addDependency(dependencies, it)
                             }
                             configurations.api.allDependencies.each {
-                                addDependency(dependencies, it)
+                                addDependency(dependencies, it).appendNode('scope', 'runtime')
                             }
                         }
                     }
@@ -131,11 +131,12 @@ subprojects {
     apply plugin: "maven-publish"
 }
 
-private static def addDependency(dependencies, it) {
-    def dependency = dependencies.appendNode('dependency')
-    dependency.appendNode('groupId', it.group)
-    dependency.appendNode('artifactId', it.name)
-    dependency.appendNode('version', it.version)
+private static Object addDependency(Object dependenciesNode, Dependency dependency) {
+    def dependencyNode = dependenciesNode.appendNode('dependency')
+    dependencyNode.appendNode('groupId', dependency.group)
+    dependencyNode.appendNode('artifactId', dependency.name)
+    dependencyNode.appendNode('version', dependency.version)
+    return dependencyNode
 }
 
 private def getShortSha() {
