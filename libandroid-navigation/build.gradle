@@ -45,7 +45,7 @@ dependencies {
   api dependenciesList.mapboxEvents
   api dependenciesList.mapboxSdkServices
   api dependenciesList.mapboxSdkTurf
-  api "com.mapbox.mapboxsdk:mapbox-android-core:3.2.0"
+  api dependenciesList.mapboxCore
 
   // Appcompat
   implementation dependenciesList.appcompat
@@ -66,8 +66,6 @@ dependencies {
 }
 
 apply from: 'javadoc.gradle'
-apply from: "${rootDir}/gradle/mvn-push-android.gradle"
 apply from: "${rootDir}/gradle/checkstyle.gradle"
 apply from: "${rootDir}/gradle/jacoco.gradle"
-apply from: "${rootDir}/gradle/dependencies-graph.gradle"
 apply from: "${rootDir}/gradle/dependency-updates.gradle"

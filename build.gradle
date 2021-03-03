@@ -2,48 +2,108 @@ apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'jacoco'
 
 buildscript {
-  apply from: "${rootDir}/gradle/dependencies.gradle"
+    apply from: "${rootDir}/gradle/dependencies.gradle"
 
-  repositories {
-    google()
-    jcenter()
-    maven { url 'https://plugins.gradle.org/m2' }
-  }
-  dependencies {
-    classpath pluginDependencies.gradle
-    classpath pluginDependencies.coveralls
-    classpath pluginDependencies.errorprone
-    classpath pluginDependencies.dependencyUpdates
-  }
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://plugins.gradle.org/m2' }
+    }
+    dependencies {
+        classpath pluginDependencies.gradle
+        classpath pluginDependencies.coveralls
+        classpath pluginDependencies.errorprone
+        classpath pluginDependencies.dependencyUpdates
+    }
 }
 
 task testReport(type: TestReport, group: 'Build') {
-  description = 'Generates an aggregate test report'
-  destinationDir = file("${buildDir}/reports/allTests")
+    description = 'Generates an aggregate test report'
+    destinationDir = file("${buildDir}/reports/allTests")
 }
 
 allprojects {
-  repositories {
-    google()
-    jcenter()
-    maven { url 'https://plugins.gradle.org/m2' }
-  }
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://plugins.gradle.org/m2' }
+    }
 
-  group = GROUP
-  version = VERSION_NAME
+    group = GROUP
+    version = VERSION_NAME
 }
 
 subprojects {
-  apply plugin: 'idea'
-  apply plugin: 'net.ltgt.errorprone'
-  apply from: "${rootDir}/gradle/dependencies.gradle"
+    apply plugin: 'idea'
+    apply plugin: 'net.ltgt.errorprone'
+    apply from: "${rootDir}/gradle/dependencies.gradle"
 
-  dependencies {
-    errorprone dependenciesList.errorprone
-    errorproneJavac dependenciesList.errorproneJavac
-  }
+    dependencies {
+        errorprone dependenciesList.errorprone
+        errorproneJavac dependenciesList.errorproneJavac
+    }
+    afterEvaluate { project ->
+        task sourcesJar(type: Jar) {
+            if (pluginManager.hasPlugin('com.android.library')) {
+                classifier 'sources'
+                from android.sourceSets.main.java.srcDirs
+            } else {
+                classifier 'sources'
+                from sourceSets.main.allSource
+            }
+        }
+        publishing {
+            repositories {
+                maven {
+                    name = "GitHubPackages"
+                    url = uri("https://maven.pkg.github.com/droidsonroids/graphhopper-navigation-android")
+                    credentials {
+                        username = System.getenv("GPR_USER")
+                        password = System.getenv("GPR_API_KEY")
+                    }
+                }
+            }
+            publications {
+                gpr(MavenPublication) {
+                    from components.findByName("release")
+                    artifact tasks.sourcesJar
+
+                    def getVersionName = { ->
+                        def currentBranch = System.getenv('BITRISE_GIT_BRANCH')
+                        def deployBranch = System.getenv('DEPLOY_BRANCH')
+                        def isSnapshot = currentBranch == null || currentBranch != deployBranch
+                        def artifactVersion = VERSION_NAME
+                        return isSnapshot ? "${artifactVersion}.SNAPSHOT.${getShortSha()}" : "${artifactVersion}"
+                    }
+
+                    def getArtifactPath = { ->
+                        def aarPath = "$buildDir/outputs/aar/${project.name}-release.aar"
+                        def jarPath = "$buildDir/libs/${project.name}.jar"
+                        def isAar = file(aarPath).exists()
+                        return isAar ? aarPath : jarPath
+                    }
+
+                    groupId project.group
+                    artifactId project.name
+                    version getVersionName()
+                    artifact getArtifactPath()
+                }
+            }
+        }
+    }
+
+    apply plugin: "maven-publish"
+}
+
+private def getShortSha() {
+    def stdOut = new ByteArrayOutputStream()
+    exec {
+        commandLine 'git', 'rev-parse', 'HEAD'
+        standardOutput = stdOut
+    }
+    return "$stdOut".trim().take(7)
 }
 
 task clean(type: Delete) {
-  delete rootProject.buildDir
+    delete rootProject.buildDir
 }
