@@ -1,1 +1,1 @@
-include ':libandroid-navigation'
+include ':navigation-android'
