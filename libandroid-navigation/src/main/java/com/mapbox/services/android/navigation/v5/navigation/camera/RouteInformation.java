@@ -1,11 +1,12 @@
 package com.mapbox.services.android.navigation.v5.navigation.camera;
 
 import android.location.Location;
-import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.services.android.navigation.v5.routeprogress.RouteProgress;
+
+import androidx.annotation.Nullable;
 
 /**
  * This class holds all information related to a route and a user's progress along the route. It

@@ -1,12 +1,13 @@
 package com.mapbox.services.android.navigation.v5.navigation;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 
 import com.mapbox.services.android.navigation.v5.navigation.notification.NavigationNotification;
 import com.mapbox.services.android.navigation.v5.routeprogress.RouteProgress;
 
 import org.junit.Test;
+
+import androidx.annotation.NonNull;
 
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;

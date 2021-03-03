@@ -1,5 +1,7 @@
 package com.mapbox.services.android.navigation.v5.milestone;
 
+import android.os.Build;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mapbox.api.directions.v5.DirectionsAdapterFactory;
@@ -17,7 +19,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(sdk = Build.VERSION_CODES.P)
 public class TriggerTest extends BaseTest {
 
   private static final String ROUTE_FIXTURE = "directions_v5_precision_6.json";

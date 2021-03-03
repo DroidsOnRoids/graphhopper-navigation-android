@@ -1,8 +1,5 @@
 package com.mapbox.services.android.navigation.v5.navigation;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
 import com.google.auto.value.AutoValue;
 import com.mapbox.api.directions.v5.models.LegStep;
 import com.mapbox.api.directions.v5.models.VoiceInstructions;
@@ -12,6 +9,8 @@ import com.mapbox.services.android.navigation.v5.routeprogress.RouteProgress;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import okhttp3.Cache;
 import okhttp3.ResponseBody;
 import retrofit2.Call;

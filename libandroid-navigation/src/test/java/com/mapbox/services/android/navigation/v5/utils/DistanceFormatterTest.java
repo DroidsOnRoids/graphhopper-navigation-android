@@ -3,6 +3,7 @@ package com.mapbox.services.android.navigation.v5.utils;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.LocaleList;
 
 import com.mapbox.api.directions.v5.DirectionsCriteria;
@@ -16,6 +17,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import java.util.Locale;
 
@@ -24,6 +26,7 @@ import static com.mapbox.services.android.navigation.v5.navigation.NavigationCon
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(sdk = Build.VERSION_CODES.P)
 public class DistanceFormatterTest {
   private static final double LARGE_LARGE_UNIT = 18124.65;
   private static final double MEDIUM_LARGE_UNIT = 9812.33;

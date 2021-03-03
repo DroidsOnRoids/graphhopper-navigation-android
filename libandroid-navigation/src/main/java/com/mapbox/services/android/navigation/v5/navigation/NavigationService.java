@@ -6,15 +6,15 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
 
 import com.mapbox.android.core.location.LocationEngine;
+import com.mapbox.android.core.location.LocationEngineRequest;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
-import com.mapbox.services.android.navigation.v5.location.LocationValidator;
 import com.mapbox.services.android.navigation.v5.navigation.notification.NavigationNotification;
 import com.mapbox.services.android.navigation.v5.route.FasterRoute;
 import com.mapbox.services.android.navigation.v5.route.RouteFetcher;
 
+import androidx.annotation.Nullable;
 import timber.log.Timber;
 
 /**
@@ -32,7 +32,7 @@ public class NavigationService extends Service {
 
   private final IBinder localBinder = new LocalBinder();
   private RouteProcessorBackgroundThread thread;
-  private NavigationLocationEngineUpdater locationEngineUpdater;
+  private LocationUpdater locationEngineUpdater;
   private RouteFetcher routeFetcher;
   private NavigationNotificationProvider notificationProvider;
 
@@ -48,7 +48,6 @@ public class NavigationService extends Service {
    */
   @Override
   public int onStartCommand(Intent intent, int flags, int startId) {
-    NavigationTelemetry.getInstance().initializeLifecycleMonitor(getApplication());
     return START_STICKY;
   }
 
@@ -65,7 +64,6 @@ public class NavigationService extends Service {
   void startNavigation(MapboxNavigation mapboxNavigation) {
     initialize(mapboxNavigation);
     startForegroundNotification(notificationProvider.retrieveNotification());
-    locationEngineUpdater.forceLocationUpdate(mapboxNavigation.getRoute());
   }
 
   /**
@@ -73,7 +71,7 @@ public class NavigationService extends Service {
    */
   void endNavigation() {
     routeFetcher.clearListeners();
-    locationEngineUpdater.removeLocationEngineListener();
+    locationEngineUpdater.removeLocationUpdates();
     notificationProvider.shutdown(getApplication());
     thread.quit();
   }
@@ -120,11 +118,8 @@ public class NavigationService extends Service {
   private void initializeLocationProvider(MapboxNavigation mapboxNavigation) {
     LocationEngine locationEngine = mapboxNavigation.getLocationEngine();
     int accuracyThreshold = mapboxNavigation.options().locationAcceptableAccuracyInMetersThreshold();
-    LocationValidator validator = new LocationValidator(accuracyThreshold);
-    NavigationLocationEngineListener listener = new NavigationLocationEngineListener(
-      thread, mapboxNavigation, locationEngine, validator
-    );
-    locationEngineUpdater = new NavigationLocationEngineUpdater(locationEngine, listener);
+    LocationEngineRequest locationEngineRequest = mapboxNavigation.retrieveLocationEngineRequest();
+    locationEngineUpdater = new LocationUpdater(thread, mapboxNavigation, locationEngine, locationEngineRequest);
   }
 
   private void startForegroundNotification(NavigationNotification navigationNotification) {

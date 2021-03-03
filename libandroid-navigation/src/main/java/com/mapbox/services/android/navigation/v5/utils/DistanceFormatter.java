@@ -3,7 +3,6 @@ package com.mapbox.services.android.navigation.v5.utils;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.location.Location;
-import android.support.annotation.NonNull;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
@@ -22,6 +21,8 @@ import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import androidx.annotation.NonNull;
 
 import static com.mapbox.turf.TurfConstants.UNIT_FEET;
 import static com.mapbox.turf.TurfConstants.UNIT_KILOMETERS;

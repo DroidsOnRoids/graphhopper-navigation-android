@@ -115,7 +115,7 @@ public class FasterRouteDetectorTest extends BaseTest {
       .build();
     Context context = mock(Context.class);
     when(context.getApplicationContext()).thenReturn(mock(Context.class));
-    return new MapboxNavigation(context, ACCESS_TOKEN, options, mock(NavigationTelemetry.class),
+    return new MapboxNavigation(context, ACCESS_TOKEN, options,
       mock(LocationEngine.class));
   }
 

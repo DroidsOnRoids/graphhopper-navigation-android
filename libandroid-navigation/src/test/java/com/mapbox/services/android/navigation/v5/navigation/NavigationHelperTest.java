@@ -2,7 +2,7 @@ package com.mapbox.services.android.navigation.v5.navigation;
 
 import android.content.Context;
 import android.location.Location;
-import android.support.v4.util.Pair;
+import android.os.Build;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -38,6 +38,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.core.util.Pair;
+
 import static com.mapbox.services.android.navigation.v5.navigation.NavigationHelper.checkMilestones;
 import static com.mapbox.services.android.navigation.v5.navigation.NavigationHelper.isUserOffRoute;
 import static junit.framework.Assert.assertEquals;
@@ -48,7 +50,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, manifest = Config.DEFAULT_MANIFEST_NAME)
+@Config(sdk = Build.VERSION_CODES.P, manifest = Config.DEFAULT_MANIFEST_NAME)
 public class NavigationHelperTest extends BaseTest {
 
   private static final String MULTI_LEG_ROUTE_FIXTURE = "directions_two_leg_route.json";
@@ -101,7 +103,7 @@ public class NavigationHelperTest extends BaseTest {
     Context context = mock(Context.class);
     when(context.getApplicationContext()).thenReturn(mock(Context.class));
     MapboxNavigation mapboxNavigation = new MapboxNavigation(context, ACCESS_TOKEN, options,
-      mock(NavigationTelemetry.class), mock(LocationEngine.class));
+            mock(LocationEngine.class));
     mapboxNavigation.addMilestone(new StepMilestone.Builder()
       .setTrigger(Trigger.eq(TriggerProperty.STEP_INDEX, 0))
       .setIdentifier(1001).build());
@@ -124,7 +126,7 @@ public class NavigationHelperTest extends BaseTest {
     Context context = mock(Context.class);
     when(context.getApplicationContext()).thenReturn(mock(Context.class));
     MapboxNavigation mapboxNavigation = new MapboxNavigation(context, ACCESS_TOKEN, options,
-      mock(NavigationTelemetry.class), mock(LocationEngine.class));
+      mock(LocationEngine.class));
     NavigationLocationUpdate model = NavigationLocationUpdate.create(mock(Location.class), mapboxNavigation);
 
     boolean userOffRoute = isUserOffRoute(model, mock(RouteProgress.class), mock(OffRouteCallback.class));

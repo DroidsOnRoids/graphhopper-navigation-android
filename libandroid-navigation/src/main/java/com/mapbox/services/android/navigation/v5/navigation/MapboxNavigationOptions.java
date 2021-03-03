@@ -1,9 +1,9 @@
 package com.mapbox.services.android.navigation.v5.navigation;
 
-import android.support.annotation.Nullable;
-
 import com.google.auto.value.AutoValue;
 import com.mapbox.services.android.navigation.v5.navigation.notification.NavigationNotification;
+
+import androidx.annotation.Nullable;
 
 import static com.mapbox.services.android.navigation.v5.navigation.NavigationConstants.ROUNDING_INCREMENT_FIFTY;
 

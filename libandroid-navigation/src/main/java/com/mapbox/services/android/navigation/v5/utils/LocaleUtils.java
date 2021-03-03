@@ -2,11 +2,12 @@ package com.mapbox.services.android.navigation.v5.utils;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.NonNull;
 
 import com.mapbox.api.directions.v5.DirectionsCriteria;
 
 import java.util.Locale;
+
+import androidx.annotation.NonNull;
 
 public class LocaleUtils {
 

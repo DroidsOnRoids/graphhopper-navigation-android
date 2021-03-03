@@ -2,7 +2,7 @@ package com.mapbox.services.android.navigation.v5.navigation;
 
 import android.content.Context;
 import android.location.Location;
-import android.support.annotation.NonNull;
+import android.os.Build;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -30,6 +30,8 @@ import org.mockito.MockitoAnnotations;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+import androidx.annotation.NonNull;
+
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -37,7 +39,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, manifest = Config.DEFAULT_MANIFEST_NAME)
+@Config(sdk = Build.VERSION_CODES.P, manifest = Config.DEFAULT_MANIFEST_NAME)
 public class NavigationEventDispatcherTest extends BaseTest {
 
   private static final String PRECISION_6 = "directions_v5_precision_6.json";
@@ -69,7 +71,7 @@ public class NavigationEventDispatcherTest extends BaseTest {
     MockitoAnnotations.initMocks(this);
     Context context = mock(Context.class);
     when(context.getApplicationContext()).thenReturn(mock(Context.class));
-    navigation = new MapboxNavigation(context, ACCESS_TOKEN, mock(NavigationTelemetry.class),
+    navigation = new MapboxNavigation(context, ACCESS_TOKEN,
       mock(LocationEngine.class));
     navigationEventDispatcher = navigation.getEventDispatcher();
 

@@ -1,5 +1,7 @@
 package com.mapbox.services.android.navigation.v5.milestone;
 
+import android.os.Build;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mapbox.api.directions.v5.DirectionsAdapterFactory;
@@ -11,12 +13,14 @@ import com.mapbox.services.android.navigation.v5.routeprogress.RouteProgress;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(sdk = Build.VERSION_CODES.P)
 public class StepMilestoneTest extends BaseTest {
 
   private static final String ROUTE_FIXTURE = "directions_v5_precision_6.json";

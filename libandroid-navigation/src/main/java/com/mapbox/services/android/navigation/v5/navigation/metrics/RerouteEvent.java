@@ -1,8 +1,8 @@
 package com.mapbox.services.android.navigation.v5.navigation.metrics;
 
-import android.support.annotation.NonNull;
-
 import com.mapbox.android.telemetry.TelemetryUtils;
+
+import androidx.annotation.NonNull;
 
 public class RerouteEvent implements TelemetryEvent {
 

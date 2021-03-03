@@ -1,7 +1,5 @@
 package com.mapbox.services.android.navigation.v5.navigation;
 
-import android.support.annotation.NonNull;
-
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.services.android.navigation.v5.route.FasterRoute;
@@ -11,6 +9,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;

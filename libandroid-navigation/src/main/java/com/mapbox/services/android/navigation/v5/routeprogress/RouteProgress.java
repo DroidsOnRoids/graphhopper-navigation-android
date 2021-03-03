@@ -1,9 +1,5 @@
 package com.mapbox.services.android.navigation.v5.routeprogress;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.util.Pair;
-
 import com.google.auto.value.AutoValue;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.api.directions.v5.models.RouteLeg;
@@ -11,6 +7,10 @@ import com.mapbox.api.directions.v5.models.StepIntersection;
 import com.mapbox.geojson.Point;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Pair;
 
 /**
  * This class contains all progress information at any given time during a navigation session. This

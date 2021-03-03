@@ -2,7 +2,6 @@ apply plugin: 'com.android.library'
 
 android {
   compileSdkVersion androidVersions.compileSdkVersion
-  buildToolsVersion androidVersions.buildToolsVersion
 
   defaultConfig {
     minSdkVersion androidVersions.minSdkVersion
@@ -36,22 +35,27 @@ android {
     unitTests.returnDefaultValues = true
     unitTests.includeAndroidResources = true
   }
+
+  lintOptions {
+    abortOnError false
+  }
 }
 
 dependencies {
   api dependenciesList.mapboxEvents
   api dependenciesList.mapboxSdkServices
   api dependenciesList.mapboxSdkTurf
+  api "com.mapbox.mapboxsdk:mapbox-android-core:3.2.0"
 
-  // Support
-  implementation dependenciesList.supportAppcompatV7
+  // Appcompat
+  implementation dependenciesList.appcompat
 
   // Logging
   implementation dependenciesList.timber
 
   // AutoValues
   annotationProcessor dependenciesList.autoValue
-  compileOnly dependenciesList.autoValue
+  compileOnly dependenciesList.autoValueAnnotations
 
   // Unit testing
   testImplementation dependenciesList.junit

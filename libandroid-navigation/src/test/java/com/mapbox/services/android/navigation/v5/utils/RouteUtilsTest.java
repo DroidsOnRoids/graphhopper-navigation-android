@@ -1,7 +1,5 @@
 package com.mapbox.services.android.navigation.v5.utils;
 
-import android.support.annotation.NonNull;
-
 import com.mapbox.api.directions.v5.DirectionsCriteria;
 import com.mapbox.api.directions.v5.models.BannerInstructions;
 import com.mapbox.api.directions.v5.models.BannerText;
@@ -20,6 +18,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;

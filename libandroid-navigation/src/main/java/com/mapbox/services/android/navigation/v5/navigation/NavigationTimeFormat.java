@@ -1,10 +1,10 @@
 package com.mapbox.services.android.navigation.v5.navigation;
 
 
-import android.support.annotation.IntDef;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.IntDef;
 
 public class NavigationTimeFormat {
 

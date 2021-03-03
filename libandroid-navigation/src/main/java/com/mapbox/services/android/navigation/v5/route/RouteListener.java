@@ -1,9 +1,9 @@
 package com.mapbox.services.android.navigation.v5.route;
 
-import android.support.annotation.Nullable;
-
 import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.services.android.navigation.v5.routeprogress.RouteProgress;
+
+import androidx.annotation.Nullable;
 
 /**
  * Will fire when either a successful / failed response is received.

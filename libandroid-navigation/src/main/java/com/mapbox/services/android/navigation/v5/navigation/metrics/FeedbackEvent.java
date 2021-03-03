@@ -1,11 +1,11 @@
 package com.mapbox.services.android.navigation.v5.navigation.metrics;
 
-import android.support.annotation.StringDef;
-
 import com.mapbox.android.telemetry.TelemetryUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+
+import androidx.annotation.StringDef;
 
 public class FeedbackEvent implements TelemetryEvent {
 

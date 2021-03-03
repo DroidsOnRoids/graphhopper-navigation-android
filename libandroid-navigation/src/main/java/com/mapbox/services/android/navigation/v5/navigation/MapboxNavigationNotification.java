@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.v4.app.NotificationCompat;
 import android.text.SpannableString;
 import android.text.format.DateFormat;
 import android.widget.RemoteViews;
@@ -25,6 +24,8 @@ import com.mapbox.services.android.navigation.v5.utils.LocaleUtils;
 import com.mapbox.services.android.navigation.v5.utils.ManeuverUtils;
 
 import java.util.Calendar;
+
+import androidx.core.app.NotificationCompat;
 
 import static com.mapbox.services.android.navigation.v5.navigation.NavigationConstants.NAVIGATION_NOTIFICATION_CHANNEL;
 import static com.mapbox.services.android.navigation.v5.navigation.NavigationConstants.NAVIGATION_NOTIFICATION_ID;

@@ -1,8 +1,6 @@
 package com.mapbox.services.android.navigation.v5;
 
 import android.location.Location;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.geojson.Point;
@@ -10,6 +8,9 @@ import com.mapbox.services.android.navigation.v5.routeprogress.RouteProgress;
 
 import java.io.IOException;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class BaseTest {
 

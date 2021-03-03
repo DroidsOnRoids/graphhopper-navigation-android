@@ -1,6 +1,7 @@
 package com.mapbox.services.android.navigation.v5.snap;
 
 import android.location.Location;
+import android.os.Build;
 
 import com.mapbox.services.android.navigation.BuildConfig;
 import com.mapbox.services.android.navigation.v5.BaseTest;
@@ -15,7 +16,7 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class)
+@Config(sdk = Build.VERSION_CODES.P)
 public class SnapToRouteTest extends BaseTest {
 
   @Test
