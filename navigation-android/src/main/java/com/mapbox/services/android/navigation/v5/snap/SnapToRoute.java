@@ -10,6 +10,7 @@ import com.mapbox.services.android.navigation.v5.utils.MathUtils;
 import com.mapbox.turf.TurfMeasurement;
 import com.mapbox.turf.TurfMisc;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -45,9 +46,15 @@ public class SnapToRoute extends Snap {
   private float calculateBearing(Location location, Point snappedLocation, List<Point> stepCoordinates) {
     LineString stepLineString = LineString.fromLngLats(stepCoordinates);
     Point maneuverPoint = stepCoordinates.get(stepCoordinates.size() - 1);
+    List<Point> coordinates;
+    if(!snappedLocation.equals(maneuverPoint)) {
     // get slice line string between current point to maneuver point
-    LineString remainingStepLineString = TurfMisc.lineSlice(snappedLocation, maneuverPoint, stepLineString);
-    List<Point> coordinates = remainingStepLineString.coordinates();
+      LineString remainingStepLineString = TurfMisc.lineSlice(snappedLocation, maneuverPoint, stepLineString);
+      coordinates = remainingStepLineString.coordinates();
+    } else {
+      coordinates = Collections.emptyList();
+    }
+
     // has current point and next point
     if (coordinates.size() > 1) {
       // get second point to have upcoming point
