@@ -1,8 +1,10 @@
 package com.mapbox.services.android.navigation.v5.navigation;
 
 import com.google.auto.value.AutoValue;
+import com.mapbox.services.android.navigation.R;
 import com.mapbox.services.android.navigation.v5.navigation.notification.NavigationNotification;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.Nullable;
 
 import static com.mapbox.services.android.navigation.v5.navigation.NavigationConstants.ROUNDING_INCREMENT_FIFTY;
@@ -47,6 +49,9 @@ public abstract class MapboxNavigationOptions {
 
   @Nullable
   public abstract NavigationNotification navigationNotification();
+
+  @ColorRes
+  public abstract int notificationColorId();
 
   @NavigationConstants.RoundingIncrement
   public abstract int roundingIncrement();
@@ -95,6 +100,8 @@ public abstract class MapboxNavigationOptions {
 
     public abstract Builder navigationNotification(NavigationNotification notification);
 
+    public abstract Builder notificationColorId(@ColorRes int notification);
+
     public abstract Builder roundingIncrement(@NavigationConstants.RoundingIncrement int roundingIncrement);
 
     public abstract Builder timeFormatType(@NavigationTimeFormat.Type int type);
@@ -124,6 +131,7 @@ public abstract class MapboxNavigationOptions {
       .isDebugLoggingEnabled(false)
       .roundingIncrement(ROUNDING_INCREMENT_FIFTY)
       .timeFormatType(NavigationTimeFormat.NONE_SPECIFIED)
-      .locationAcceptableAccuracyInMetersThreshold(NavigationConstants.ONE_HUNDRED_METER_ACCEPTABLE_ACCURACY_THRESHOLD);
+      .locationAcceptableAccuracyInMetersThreshold(NavigationConstants.ONE_HUNDRED_METER_ACCEPTABLE_ACCURACY_THRESHOLD)
+      .notificationColorId(R.color.navigationNotificationBackground);
   }
 }

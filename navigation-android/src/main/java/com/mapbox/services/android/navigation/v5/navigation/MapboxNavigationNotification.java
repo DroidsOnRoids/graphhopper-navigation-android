@@ -25,7 +25,9 @@ import com.mapbox.services.android.navigation.v5.utils.ManeuverUtils;
 
 import java.util.Calendar;
 
+import androidx.annotation.ColorInt;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import static com.mapbox.services.android.navigation.v5.navigation.NavigationConstants.NAVIGATION_NOTIFICATION_CHANNEL;
 import static com.mapbox.services.android.navigation.v5.navigation.NavigationConstants.NAVIGATION_NOTIFICATION_ID;
@@ -37,6 +39,7 @@ import static com.mapbox.services.android.navigation.v5.utils.time.TimeFormatter
 class MapboxNavigationNotification implements NavigationNotification {
 
   private static final String END_NAVIGATION_ACTION = "com.mapbox.intent.action.END_NAVIGATION";
+  private static final String SET_BACKGROUND_COLOR = "setBackgroundColor";
   private NotificationCompat.Builder notificationBuilder;
   private NotificationManager notificationManager;
   private Notification notification;
@@ -82,13 +85,14 @@ class MapboxNavigationNotification implements NavigationNotification {
   }
 
   private void initialize(Context context, MapboxNavigation mapboxNavigation) {
+    int background = ContextCompat.getColor(context, mapboxNavigation.options().notificationColorId());
     this.mapboxNavigation = mapboxNavigation;
     etaFormat = context.getString(R.string.eta_format);
     initializeDistanceFormatter(context, mapboxNavigation);
     notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
     isTwentyFourHourFormat = DateFormat.is24HourFormat(context);
     createNotificationChannel(context);
-    buildNotification(context);
+    buildNotification(context, background);
     registerReceiver(context);
   }
 
@@ -114,11 +118,13 @@ class MapboxNavigationNotification implements NavigationNotification {
     }
   }
 
-  private void buildNotification(Context context) {
+  private void buildNotification(Context context, @ColorInt int background) {
     collapsedNotificationRemoteViews = new RemoteViews(context.getPackageName(),
       R.layout.collapsed_navigation_notification_layout);
+    collapsedNotificationRemoteViews.setInt(R.id.collapsedLayout, SET_BACKGROUND_COLOR, background);
     expandedNotificationRemoteViews = new RemoteViews(context.getPackageName(),
       R.layout.expanded_navigation_notification_layout);
+    expandedNotificationRemoteViews.setInt(R.id.expandedLayout, SET_BACKGROUND_COLOR, background);
 
     PendingIntent pendingOpenIntent = createPendingOpenIntent(context);
     // Will trigger endNavigationBtnReceiver when clicked

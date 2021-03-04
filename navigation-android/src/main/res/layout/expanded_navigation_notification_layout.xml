@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/expandedLayout"
     style="@android:style/TextAppearance.StatusBar.EventContent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/holo_blue_dark"
+    tools:background="@color/navigationNotificationBackground"
+    android:orientation="vertical"
     android:paddingTop="8dp"
-    android:paddingBottom="8dp"
-    android:orientation="vertical">
+    android:paddingBottom="8dp">
 
     <include layout="@layout/collapsed_navigation_notification_layout" />
 
     <LinearLayout
+        android:id="@+id/endNavigationBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/endNavigationBtn"
-        android:gravity="center_vertical"
         android:layout_marginLeft="56dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:padding="8dp">
 
         <ImageView
@@ -26,7 +29,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:src="@drawable/ic_close"
-            android:tint="@android:color/white"/>
+            android:tint="@color/navigationNotificationText" />
 
         <TextView
             android:layout_width="match_parent"
@@ -34,6 +37,6 @@
             android:background="@android:color/transparent"
             android:text="@string/end_navigation"
             android:textAllCaps="true"
-            android:textColor="@android:color/white"/>
+            android:textColor="@color/navigationNotificationText" />
     </LinearLayout>
 </LinearLayout>
