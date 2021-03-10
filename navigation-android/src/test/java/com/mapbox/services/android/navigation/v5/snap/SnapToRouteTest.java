@@ -32,7 +32,7 @@ public class SnapToRouteTest extends BaseTest {
     Snap snap = new SnapToRoute();
     Location location = new Location("test");
 
-    Location snappedLocation = snap.getSnappedLocation(location, routeProgress);
+    Location snappedLocation = snap.getSnappedLocation(location, routeProgress, 10);
 
     assertTrue(snappedLocation.getProvider().equals("test"));
   }

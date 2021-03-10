@@ -525,7 +525,8 @@ public class NavigationHelper {
   private static Location getSnappedLocation(MapboxNavigation mapboxNavigation, Location location,
                                              RouteProgress routeProgress) {
     Snap snap = mapboxNavigation.getSnapEngine();
-    return snap.getSnappedLocation(location, routeProgress);
+    double maxSnapDistance = mapboxNavigation.options().userLocationSnapDistance();
+    return snap.getSnappedLocation(location, routeProgress, maxSnapDistance);
   }
 
   private static void setOffRouteDetectorCallback(OffRoute offRoute, OffRouteCallback callback) {

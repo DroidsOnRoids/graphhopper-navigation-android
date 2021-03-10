@@ -13,6 +13,8 @@ import com.mapbox.turf.TurfMisc;
 import java.util.Collections;
 import java.util.List;
 
+import static com.mapbox.turf.TurfConstants.UNIT_METRES;
+
 /**
  * This attempts to snap the user to the closest position along the route. Prior to snapping the
  * user, their location's checked to ensure that the user didn't veer off-route. If your application
@@ -24,7 +26,7 @@ import java.util.List;
 public class SnapToRoute extends Snap {
 
   @Override
-  public Location getSnappedLocation(Location location, RouteProgress routeProgress) {
+  public Location getSnappedLocation(Location location, RouteProgress routeProgress, double maxSnapDistance) {
     Location snappedLocation = new Location(location);
     Point locationToPoint = Point.fromLngLat(location.getLongitude(), location.getLatitude());
 
@@ -34,6 +36,9 @@ public class SnapToRoute extends Snap {
     if (stepCoordinates.size() > 1) {
       Feature feature = TurfMisc.nearestPointOnLine(locationToPoint, stepCoordinates);
       Point point = ((Point) feature.geometry());
+
+      if (TurfMeasurement.distance(locationToPoint, point, UNIT_METRES) > maxSnapDistance) return snappedLocation;
+
       snappedLocation.setLongitude(point.longitude());
       snappedLocation.setLatitude(point.latitude());
 
