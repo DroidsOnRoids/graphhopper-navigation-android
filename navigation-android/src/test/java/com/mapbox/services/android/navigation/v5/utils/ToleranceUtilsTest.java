@@ -26,9 +26,11 @@ public class ToleranceUtilsTest extends BaseTest {
     List<Point> stepPoints = PolylineUtils.decode(route.geometry(), PRECISION_6);
     Point midPoint = TurfMeasurement.midpoint(stepPoints.get(0), stepPoints.get(1));
 
-    double tolerance = ToleranceUtils.dynamicRerouteDistanceTolerance(midPoint, routeProgress);
-
+    double tolerance = ToleranceUtils.dynamicRerouteDistanceTolerance(midPoint, routeProgress, 50.0);
     assertEquals(25.0, tolerance, DELTA);
+
+    tolerance = ToleranceUtils.dynamicRerouteDistanceTolerance(midPoint, routeProgress, 20.0);
+    assertEquals(10.0, tolerance, DELTA);
   }
 
 
@@ -40,9 +42,11 @@ public class ToleranceUtilsTest extends BaseTest {
     LineString lineString = LineString.fromPolyline(route.geometry(), Constants.PRECISION_6);
     Point closePoint = TurfMeasurement.along(lineString, distanceToIntersection, TurfConstants.UNIT_METERS);
 
-    double tolerance = ToleranceUtils.dynamicRerouteDistanceTolerance(closePoint, routeProgress);
-
+    double tolerance = ToleranceUtils.dynamicRerouteDistanceTolerance(closePoint, routeProgress, 50.0);
     assertEquals(50.0, tolerance, DELTA);
+
+    tolerance = ToleranceUtils.dynamicRerouteDistanceTolerance(closePoint, routeProgress, 20.0);
+    assertEquals(20.0, tolerance, DELTA);
   }
 
   @Test
@@ -53,8 +57,10 @@ public class ToleranceUtilsTest extends BaseTest {
     LineString lineString = LineString.fromPolyline(route.geometry(), Constants.PRECISION_6);
     Point closePoint = TurfMeasurement.along(lineString, distanceToIntersection, TurfConstants.UNIT_METERS);
 
-    double tolerance = ToleranceUtils.dynamicRerouteDistanceTolerance(closePoint, routeProgress);
-
+    double tolerance = ToleranceUtils.dynamicRerouteDistanceTolerance(closePoint, routeProgress, 50.0);
     assertEquals(50.0, tolerance, DELTA);
+
+    tolerance = ToleranceUtils.dynamicRerouteDistanceTolerance(closePoint, routeProgress, 20.0);
+    assertEquals(20.0, tolerance, DELTA);
   }
 }

@@ -40,7 +40,7 @@ public class OffRouteDetectorTest extends BaseTest {
   public void setup() throws Exception {
     MockitoAnnotations.initMocks(this);
 
-    options = MapboxNavigationOptions.builder().build();
+    options = MapboxNavigationOptions.builder().maximumDistanceOffRoute(50).build();
 
     offRouteDetector = new OffRouteDetector();
     offRouteDetector.setOffRouteCallback(mockCallback);

@@ -2,6 +2,7 @@ package com.mapbox.services.android.navigation.v5.utils;
 
 import com.mapbox.api.directions.v5.models.StepIntersection;
 import com.mapbox.geojson.Point;
+import com.mapbox.services.android.navigation.v5.navigation.MapboxNavigationOptions;
 import com.mapbox.services.android.navigation.v5.navigation.NavigationConstants;
 import com.mapbox.services.android.navigation.v5.routeprogress.RouteProgress;
 import com.mapbox.turf.TurfClassification;
@@ -18,7 +19,8 @@ public final class ToleranceUtils {
   }
 
   public static double dynamicRerouteDistanceTolerance(Point snappedPoint,
-                                                       RouteProgress routeProgress) {
+          RouteProgress routeProgress,
+          double maximumDistanceOffRoute) {
     List<StepIntersection> intersections
       = routeProgress.currentLegProgress().currentStepProgress().intersections();
     List<Point> intersectionsPoints = new ArrayList<>();
@@ -29,15 +31,15 @@ public final class ToleranceUtils {
     Point closestIntersection = TurfClassification.nearestPoint(snappedPoint, intersectionsPoints);
 
     if (closestIntersection.equals(snappedPoint)) {
-      return NavigationConstants.MINIMUM_DISTANCE_BEFORE_REROUTING;
+      return maximumDistanceOffRoute;
     }
 
     double distanceToNextIntersection = TurfMeasurement.distance(snappedPoint, closestIntersection,
       TurfConstants.UNIT_METERS);
 
     if (distanceToNextIntersection <= NavigationConstants.MANEUVER_ZONE_RADIUS) {
-      return NavigationConstants.MINIMUM_DISTANCE_BEFORE_REROUTING / 2;
+      return maximumDistanceOffRoute / 2;
     }
-    return NavigationConstants.MINIMUM_DISTANCE_BEFORE_REROUTING;
+    return maximumDistanceOffRoute;
   }
 }
