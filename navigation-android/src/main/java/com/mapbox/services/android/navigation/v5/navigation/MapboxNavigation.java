@@ -765,4 +765,10 @@ public class MapboxNavigation implements ServiceConnection {
         navigationService = null;
         isBound = false;
     }
+
+    public void snapToRoute(boolean enabled) {
+        options = options.toBuilder()
+                .snapToRoute(enabled)
+                .build();
+    }
 }
