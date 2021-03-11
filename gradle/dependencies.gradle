@@ -9,7 +9,6 @@ ext {
   version = [
       mapboxMapSdk       : '9.2.1',
       mapboxSdkServices  : '5.8.0',
-      mapboxEvents       : '6.3.0',
       mapboxCore         : '3.2.0',
       autoValue          : '1.7.4',
       junit              : '4.13.2',
@@ -35,7 +34,6 @@ ext {
       mapboxMapSdk           : "com.mapbox.mapboxsdk:mapbox-android-sdk:${version.mapboxMapSdk}",
       mapboxSdkServices      : "com.mapbox.mapboxsdk:mapbox-sdk-services:${version.mapboxSdkServices}",
       mapboxSdkTurf          : "com.mapbox.mapboxsdk:mapbox-sdk-turf:${version.mapboxSdkServices}",
-      mapboxEvents           : "com.mapbox.mapboxsdk:mapbox-android-telemetry:${version.mapboxEvents}",
       mapboxCore           : "com.mapbox.mapboxsdk:mapbox-android-core:${version.mapboxCore}",
 
       // AutoValue
