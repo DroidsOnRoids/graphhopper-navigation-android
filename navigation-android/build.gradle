@@ -47,7 +47,7 @@ android {
 }
 
 dependencies {
-//  api dependenciesList.mapboxEvents
+  api dependenciesList.mapboxEvents
   api dependenciesList.mapboxSdkServices
   api dependenciesList.mapboxSdkTurf
   api dependenciesList.mapboxCore
