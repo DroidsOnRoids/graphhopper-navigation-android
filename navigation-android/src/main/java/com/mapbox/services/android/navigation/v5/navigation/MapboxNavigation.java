@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -766,9 +767,7 @@ public class MapboxNavigation implements ServiceConnection {
         isBound = false;
     }
 
-    public void snapToRoute(boolean enabled) {
-        options = options.toBuilder()
-                .snapToRoute(enabled)
-                .build();
+    public void updateOptions(Function<MapboxNavigationOptions.Builder, MapboxNavigationOptions> optionsBuilder) {
+        options = optionsBuilder.apply(options.toBuilder());
     }
 }

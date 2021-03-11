@@ -31,6 +31,11 @@ android {
     }
   }
 
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
   testOptions {
     unitTests.returnDefaultValues = true
     unitTests.includeAndroidResources = true
@@ -42,7 +47,7 @@ android {
 }
 
 dependencies {
-  api dependenciesList.mapboxEvents
+//  api dependenciesList.mapboxEvents
   api dependenciesList.mapboxSdkServices
   api dependenciesList.mapboxSdkTurf
   api dependenciesList.mapboxCore
